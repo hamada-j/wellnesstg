@@ -1,0 +1,33 @@
+<nav>
+  <mat-toolbar>
+    <span>Wellnesstg-Electric</span>
+  </mat-toolbar>
+</nav>
+<header class="header">
+  <img src="../assets/images/log.png" />
+</header>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span class="material-icons"> cloud_upload </span>
+      &nbsp; Upload-CSV
+    </ng-template>
+    <app-upload-csv></app-upload-csv>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span class="material-icons"> toc </span>
+      Data-Table
+    </ng-template>
+    <app-data-table></app-data-table>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span class="material-icons"> assessment </span>
+      &nbsp; High-Charts
+    </ng-template>
+    <app-high-charts></app-high-charts>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,41 @@
+mat-toolbar {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  width: 100% !important;
+  background: #765d7a;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  color: #999999;
+}
+
+.header {
+  background: #765d7a;
+  img {
+    margin-top: 5%;
+    display: block;
+    width: 10%;
+  }
+}
+
+@media (min-width: 1200px) {
+  mat-toolbar {
+    height: 10%;
+  }
+}
+
+@media (max-width: 1000px) {
+  mat-toolbar {
+    height: 8%;
+  }
+}
+
+@media (max-width: 400px) {
+  mat-toolbar {
+    height: 4%;
+  }
+}
