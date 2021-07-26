@@ -1,0 +1,22 @@
+{
+  "name": "wellnesstg-restful-api",
+  "version": "1.0.0",
+  "description": "Backend NodeJS: encargado de importar los datos y exponerlos en una API que permita hacer operaciones CRUD sobre los datos",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamada-j/wellnesstg.git"
+  },
+  "keywords": [
+    "key"
+  ],
+  "author": "Hamada",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hamada-j/wellnesstg/issues"
+  },
+  "homepage": "https://github.com/hamada-j/wellnesstg#readme"
+}
