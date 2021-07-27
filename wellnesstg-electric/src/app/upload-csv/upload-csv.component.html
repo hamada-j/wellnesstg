@@ -1,1 +1,18 @@
-<p>upload-csv works!</p>
+<div class="container">
+  <input
+    id="input-file"
+    type="file"
+    accept=".csv"
+    (change)="handleFileSelect($event)"
+    hidden
+  />
+  <label for="input-file" id="label-file">Choose File</label>
+  <!-- <mat-progress-bar *ngIf="showProgressBar" [value]="file.progress"></mat-progress-bar> -->
+  <br />
+  <br />
+  <br />
+  <button *ngIf="show" mat-raised-button color="primary" (click)="openDialog()">
+    Preview and Upload
+  </button>
+  <p>{{ msg }}</p>
+</div>

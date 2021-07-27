@@ -12,7 +12,7 @@
       <span class="material-icons"> cloud_upload </span>
       &nbsp; Upload-CSV
     </ng-template>
-    <app-upload-csv></app-upload-csv>
+    <app-upload-csv (complete)="onFileComplete($event)"></app-upload-csv>
   </mat-tab>
 
   <mat-tab>
