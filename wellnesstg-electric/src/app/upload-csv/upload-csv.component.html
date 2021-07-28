@@ -11,8 +11,14 @@
   <br />
   <br />
   <br />
-  <button *ngIf="show" mat-raised-button color="primary" (click)="openDialog()">
+  <button
+    #draggable
+    *ngIf="show"
+    mat-raised-button
+    color="primary"
+    (click)="openDialog()"
+  >
     Preview and Upload
   </button>
-  <p>{{ msg }}</p>
+  <p>msg: {{ msg }}</p>
 </div>

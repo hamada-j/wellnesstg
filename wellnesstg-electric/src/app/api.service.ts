@@ -11,10 +11,12 @@ const BACKEND_URL = environment.apiUrl;
 export class ApiService {
 
   baseUrl = BACKEND_URL;
-  constructor(private httpClient: HttpClient) {}
+
+  constructor(private httpClient: HttpClient) {
+  }
 
   sendCSV(array: any): Promise<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}/post_csv`, array, {'headers': this.createHeaders()} ).toPromise();
+    return this.httpClient.post<any>(`${this.baseUrl}/post-csv`, array ).toPromise();
   }
 
   createHeaders() {

@@ -24,6 +24,7 @@ export class UploadCSVComponent implements OnInit {
   data: Customer[] = [];
   show: boolean = false;
   msg: string = '';
+  fileName: string = '';
 
   constructor(private papa: Papa, public dialog: MatDialog, private serviceApi: ApiService) { }
 
@@ -55,7 +56,10 @@ export class UploadCSVComponent implements OnInit {
               };
               if (!Object.values(element).every(el => el === undefined)) this.data.push(element);
             }
-            if (this.data !== []) this.show = true
+            if (this.data !== [] && file.name !== '') {
+              this.show = true
+              this.fileName = file.name;
+            }
           }
         });
       }
@@ -71,12 +75,21 @@ export class UploadCSVComponent implements OnInit {
         dataKey: this.data
       }
     });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        // this.serviceApi.
+        this.serviceApi.sendCSV([this.fileName, this.data]).then(res => {
+          console.log(res);
+          this.msg = res.msg
+          //this.show = false;
+          //this.resetResponse()
+          //this.accessLabel('Choose File', 'red')
+        }).catch(err => { console.log(err); });
       }
-    });
+    })
+
   }
+
 
   accessLabel(name: string, color: string){
     const inputName = document.getElementById('label-file') as HTMLLabelElement;
@@ -84,6 +97,12 @@ export class UploadCSVComponent implements OnInit {
     inputName.style.background = color
   }
 
+  resetResponse(){
+    setTimeout(async () => {
+      this.msg = '';
+      this.show = true;
+    }, 3000);
+  }
 }
 
 
@@ -105,6 +124,5 @@ export class Preview implements OnInit {
       this.dataSource = this.data.dataKey
   }
 
-
-
 }
+
