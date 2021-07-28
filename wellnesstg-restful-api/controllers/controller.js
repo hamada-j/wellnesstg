@@ -7,9 +7,15 @@ const { generateTime } = require('../utils/util');
 
 
 exports.getAll = async (req, res, next) => {
-      res.status(200).json({works: "get fine!"});
+      
+ try {
+      const data = await customSchema.find();
+      res.status(200).json({data: data})
+} catch (err) {
+      console.log(err);
+      res.status(500).json({error: "getAll: " + err });
+  }     
 };
-
 exports.postCSV = async (req, res, next) => {
       let fileName = req.body[0];
       let data = req.body[1]
