@@ -59,7 +59,7 @@ afterAll( async done => {
   console.log("End of Test !!")
 });
 
-test('GET / Get all all records in "purebas.csv". Should save 10 elements to database MongoDB Atlas and return them', async () => {
+test('GET /getAll all records in "purebas.csv" file for test pass them form CSV to JSON. Should save 10 elements to database MongoDB Atlas and return them', async () => {
   try{
 
     for( let i = 0; i < arrTest.length; i++ ) {
@@ -78,16 +78,50 @@ test('GET / Get all all records in "purebas.csv". Should save 10 elements to dat
     .expect(200)
     .then((response) => {
       expect(Array.isArray(response.body.data)).toBeTruthy();
-      expect(response.body.data.length).toEqual(arrTest.length);
-      expect(response.body.data[0]._id).not.toEqual(arrTest[0].id);
-      expect(response.body.data[1].name).toBe(arrTest[1].name);
-      expect(response.body.data[3].power).toBe(Number(arrTest[3].power));
-      expect(response.body.data[4].consumption).toBe(Number(arrTest[4].consumption));
-      expect(response.body.data[8].difference).toBe(Number(arrTest[8].difference));
-      expect(response.body.data[7].city).toBe(arrTest[7].city);
-      expect(response.body.data[9].bonus).toBe(JSON.parse(arrTest[9].bonus));
+      expect(response.body.length).toEqual(arrTest.length);
+      expect(response.body[0]._id).not.toEqual(arrTest[0].id);
+      expect(response.body[1].name).toBe(arrTest[1].name);
+      expect(response.body[3].power).toBe(Number(arrTest[3].power));
+      expect(response.body[4].consumption).toBe(Number(arrTest[4].consumption));
+      expect(response.body[8].difference).toBe(Number(arrTest[8].difference));
+      expect(response.body[7].city).toBe(arrTest[7].city);
+      expect(response.body[9].bonus).toBe(JSON.parse(arrTest[9].bonus));
     });
   }catch(err){
     console.log(err);
   } 
+});
+
+
+
+test('POST /post-one, Should post one element in database givin the correct data for the model and Mongoose _id and create time', 
+  async () => {
+    try{
+      const data = {
+          name: 'High-Tech',
+          power: 4,
+          consumption: 2,
+          difference: 2,
+          city: 'Madrid',
+          bonus: true
+      }
+
+    await supertest(app)
+      .post('/post-one')
+      .send(data)
+      .expect(200)
+      .then(async (response) => {
+        //the data in the response
+        expect(response.body.name).toBe(data.name);
+        expect(response.body.power).toBe(data.power);
+        //the data in the database
+        const result = await customSchema.findOne({ _id: response.body._id });
+        expect(result).toBeTruthy();
+        expect(result.consumption).toBe(data.consumption);
+        expect(result.city).toBe(data.city);
+        expect(result.bonus).toBe(data.bonus);
+      });
+    }catch(err){
+      console.log(err);
+    }
 });

@@ -5,6 +5,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { Papa } from 'ngx-papaparse';
 import { Customer } from '../model/model';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-csv',
@@ -26,7 +27,7 @@ export class UploadCSVComponent implements OnInit {
   msg: string = '';
   fileName: string = '';
 
-  constructor(private papa: Papa, public dialog: MatDialog, private serviceApi: ApiService) { }
+  constructor(private papa: Papa, public dialog: MatDialog, private serviceApi: ApiService, private router: Router) { }
 
   ngOnInit(){}
 
@@ -46,7 +47,7 @@ export class UploadCSVComponent implements OnInit {
           complete: (results) => {
             for (let i = 0; i < results.data.length; i++) {
               let element: Customer = {
-                id: results.data[i].id,
+                _id: results.data[i].id,
                 name: results.data[i].name,
                 power: results.data[i].power,
                 consumption: results.data[i].consumption,
@@ -76,20 +77,16 @@ export class UploadCSVComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(async result => {
       if (result === true) {
-        this.serviceApi.sendCSV([this.fileName, this.data]).then(res => {
-          console.log(res);
+        await this.serviceApi.sendCSV([this.fileName, this.data]).then(res => {
           this.msg = res.msg
-          //this.show = false;
-          //this.resetResponse()
-          //this.accessLabel('Choose File', 'red')
+          this.resetResponse()
         }).catch(err => { console.log(err); });
       }
     })
 
   }
-
 
   accessLabel(name: string, color: string){
     const inputName = document.getElementById('label-file') as HTMLLabelElement;
@@ -100,8 +97,8 @@ export class UploadCSVComponent implements OnInit {
   resetResponse(){
     setTimeout(async () => {
       this.msg = '';
-      this.show = true;
-    }, 3000);
+      window.location.reload();
+    }, 2000);
   }
 }
 

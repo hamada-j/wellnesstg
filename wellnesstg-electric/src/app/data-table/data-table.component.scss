@@ -1,0 +1,68 @@
+.form {
+  text-align: center;
+  padding: 5%;
+}
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.form-inline select {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+.error {
+  color: rgb(163, 112, 112);
+}
+.message {
+  color: rgb(106, 151, 106);
+}
+
+.table {
+  padding: 2%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -19,6 +19,14 @@ export class ApiService {
     return this.httpClient.post<any>(`${this.baseUrl}/post-csv`, array ).toPromise();
   }
 
+  sendRecord(form: Customer): Promise<Customer> {
+    return this.httpClient.post<Customer>(`${this.baseUrl}/post-one`, form ).toPromise();
+  }
+
+  getAll(): Promise<Customer[]>{
+    return this.httpClient.get<Customer[]>(`${this.baseUrl}/`).toPromise();
+  }
+
   createHeaders() {
     let headers = new HttpHeaders()
     headers=headers.append('content-type','application/json')
