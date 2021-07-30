@@ -20,6 +20,11 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatGridListModule} from '@angular/material/grid-list';
+
+// charts
+
+import { HighchartsChartModule } from 'highcharts-angular';
 
 // component
 
@@ -56,7 +61,9 @@ import { Preview } from './upload-csv/upload-csv.component';
     MatTableModule,
     MatDividerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

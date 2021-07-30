@@ -12,6 +12,8 @@ export class ApiService {
 
   baseUrl = BACKEND_URL;
 
+  action$ = new EventEmitter<String>();
+
   constructor(private httpClient: HttpClient) {
   }
 

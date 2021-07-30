@@ -93,14 +93,13 @@ export class DataTableComponent implements OnInit {
                 city: this.cities.find(x => x.id === Number(data.city)).name,
                 bonus: JSON.parse(this.bonuses.find(x => x.id === Number(data.bonus)).name),
               }
-
-              console.log(objectForm);
               await this.serviceApi.sendRecord(objectForm).then( res => {
-                    console.log(res)
                     this.message = `The record was saved in database correctly with the id ${res._id}`
                     this.resetResponse();
+                    this.form.reset();
+                    this.serviceApi.action$.emit("refresh");
                     this.ngOnInit();
-                }).catch(err => {
+              }).catch(err => {
                       console.log(err)
                       this.error = err.message;
                       this.resetResponse();
@@ -118,7 +117,7 @@ export class DataTableComponent implements OnInit {
 
   async ngOnInit() {
     await this.serviceApi.getAll().then((res) => {
-      console.log(res)
+      //console.log(res)
       this.arrayResult = new MatTableDataSource(res);
     }).catch(err => {
       console.log(err)

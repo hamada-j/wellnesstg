@@ -114,7 +114,7 @@ export class Preview implements OnInit {
   msg: string = '';
 
   constructor( @Inject(MAT_DIALOG_DATA) public data: any) {}
-  displayedColumns: string[] = ['id', 'name', 'power', 'consumption', 'difference', 'city', 'bonus'];
+  displayedColumns: string[] = ['_id', 'name', 'power', 'consumption', 'difference', 'city', 'bonus'];
   dataSource = this.data.dataKey;
 
   ngOnInit(){

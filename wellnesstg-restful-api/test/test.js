@@ -77,7 +77,7 @@ test('GET /getAll all records in "purebas.csv" file for test pass them form CSV 
     .get('/')
     .expect(200)
     .then((response) => {
-      expect(Array.isArray(response.body.data)).toBeTruthy();
+      expect(Array.isArray(response.body)).toBeTruthy();
       expect(response.body.length).toEqual(arrTest.length);
       expect(response.body[0]._id).not.toEqual(arrTest[0].id);
       expect(response.body[1].name).toBe(arrTest[1].name);

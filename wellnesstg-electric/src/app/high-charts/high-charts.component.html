@@ -1,1 +1,54 @@
-<p>high-charts works!</p>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <highcharts-chart
+      id="container"
+      [Highcharts]="Highcharts1"
+      [constructorType]="chartConstructor"
+      [options]="chartOptions1"
+      [callbackFunction]="chartCallback"
+      [(update)]="updateFromInput"
+      [oneToOne]="true"
+      style="width: 100%; height: 400px; display: block"
+    >
+    </highcharts-chart>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <highcharts-chart
+      id="container"
+      [Highcharts]="Highcharts2"
+      [constructorType]="chartConstructor"
+      [options]="chartOptions2"
+      [callbackFunction]="chartCallback"
+      [(update)]="updateFromInput"
+      [oneToOne]="true"
+      style="width: 100%; height: 400px; display: block"
+    >
+    </highcharts-chart>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <highcharts-chart
+      id="container"
+      [Highcharts]="Highcharts3"
+      [constructorType]="chartConstructor"
+      [options]="chartOptions3"
+      [callbackFunction]="chartCallback"
+      [(update)]="updateFromInput"
+      [oneToOne]="true"
+      style="width: 100%; height: 400px; display: block"
+    >
+    </highcharts-chart>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <highcharts-chart
+      id="container"
+      [Highcharts]="Highcharts4"
+      [constructorType]="chartConstructor"
+      [options]="chartOptions4"
+      [callbackFunction]="chartCallback"
+      [(update)]="updateFromInput"
+      [oneToOne]="true"
+      style="width: 100%; height: 400px; display: block"
+    >
+    </highcharts-chart>
+  </mat-grid-tile>
+</mat-grid-list>
