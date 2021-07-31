@@ -1,0 +1,13 @@
+id,name,power,consumption,difference,city,bonus
+1,Tom,10,11,-1,Madrid,true
+2,Marta,13,12,1,Sevilla,false
+3,Sam,25,20,5,Barcelona,true
+4,Jhon,10,12,-2,Madrid,true
+5,Omar,13,14,-2,Madrid,false
+6,Suly,12,12,0,Madrid,false
+7,Manuel,45,40,5,Barcelona,false
+8,Juan,12,13,-1,Sevilla,false
+9,Mariam,12,14,-2,Madrid,true
+10,Silvia,24,24,0,Madrid,false
+11,Ben,14,12,-2,Sevilla,false
+12,Dimitry,15,20,-5,Sevilla,true

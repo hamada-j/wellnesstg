@@ -1,0 +1,36 @@
+<mat-divider></mat-divider>
+<div class="container">
+  <br />
+  <br />
+  <br />
+  <input
+    id="input-file"
+    type="file"
+    accept=".csv"
+    (change)="handleFileSelect($event)"
+    hidden
+  />
+  <label for="input-file" id="label-file">Choose File</label>
+  <!-- <mat-progress-bar *ngIf="showProgressBar" [value]="file.progress"></mat-progress-bar> -->
+  <br />
+  <br />
+  <br />
+  <button
+    #draggable
+    *ngIf="show"
+    mat-raised-button
+    color="primary"
+    (click)="openDialog()"
+  >
+    Preview and Upload
+  </button>
+  <br />
+  <br />
+  <br />
+
+  <p>{{ msg }}</p>
+  <p style="color: rgb(223, 150, 150)">{{ csvError }}</p>
+  <br />
+  <br />
+</div>
+<mat-divider></mat-divider>

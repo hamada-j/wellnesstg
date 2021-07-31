@@ -1,0 +1,75 @@
+mat-toolbar {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  width: 100% !important;
+  background: #765d7a;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  color: #999999;
+}
+
+.header {
+  background: #765d7a;
+  img {
+    margin-top: 5%;
+    display: block;
+    width: 10%;
+  }
+}
+
+// @media (min-width: 300px) {
+//   mat-toolbar {
+//     height: 4%;
+//   }
+// }
+// @media (min-width: 400px) {
+//   mat-toolbar {
+//     height: 4%;
+//   }
+// }
+
+// @media (max-width: 700px) {
+//   mat-toolbar {
+//     height: 8%;
+//   }
+// }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  mat-toolbar {
+    height: 4.3%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  mat-toolbar {
+    height: 6.4%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  mat-toolbar {
+    height: 7%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  mat-toolbar {
+    height: 9.3%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  mat-toolbar {
+    height: 11%;
+  }
+}

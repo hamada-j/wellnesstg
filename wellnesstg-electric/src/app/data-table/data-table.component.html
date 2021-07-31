@@ -1,0 +1,146 @@
+<!-- FORM -->
+<h4 *ngIf="isAddMode">Add Client</h4>
+<h4 *ngIf="!isAddMode">Edit Client</h4>
+<div class="form">
+  <form class="form-inline" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label for="name">Name:</label>
+    <input
+      type="email"
+      id="name"
+      placeholder="Enter name"
+      formControlName="name"
+    />
+
+    <label for="power">Power (kW):</label>
+    <input
+      min="0"
+      type="number"
+      id="power"
+      placeholder="Enter Power"
+      formControlName="power"
+    />
+
+    <label for="consumption">Consumption (kW):</label>
+    <input
+      min="0"
+      type="number"
+      id="consumption"
+      placeholder="Enter Consumption"
+      formControlName="consumption"
+    />
+
+    <label for="difference">Difference (n):</label>
+    <input
+      type="number"
+      [value]="form.controls.power.value - form.controls.consumption.value"
+      id="difference"
+      placeholder="Enter Difference"
+      formControlName="difference"
+      name="difference"
+      [readonly]="true"
+    />
+
+    <label for="city">City:</label>
+    <select id="city" formControlName="city">
+      <option [value]="city.id" *ngFor="let city of cities">
+        {{ city.name }}
+      </option>
+    </select>
+
+    <label for="bonus">Bonus:</label>
+    <select id="bonus" formControlName="bonus">
+      <option [value]="bonus.id" *ngFor="let bonus of bonuses">
+        {{ bonus.name }}
+      </option>
+    </select>
+
+    <button type="submit" *ngIf="isAddMode">Submit</button>
+    <button type="submit" *ngIf="!isAddMode">Edit</button>
+    <button *ngIf="!isAddMode" (click)="cancelEditMode($event)">Cancel</button>
+  </form>
+
+  <p *ngIf="form.controls.power.errors">
+    {{ msg }}
+  </p>
+  <p class="error">{{ error }}</p>
+  <p class="message">{{ message }}</p>
+</div>
+
+<!-- TABLE -->
+<div class="table">
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Madrid"
+      #input
+    />
+  </mat-form-field>
+
+  <table mat-table [dataSource]="arrayResult" class="mat-elevation-z8">
+    <ng-container matColumnDef="_id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element._id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="power">
+      <th mat-header-cell *matHeaderCellDef>Power(kW)</th>
+      <td mat-cell *matCellDef="let element">{{ element.power }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="consumption">
+      <th mat-header-cell *matHeaderCellDef>Consumption(kW)</th>
+      <td mat-cell *matCellDef="let element">{{ element.consumption }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="difference">
+      <th mat-header-cell *matHeaderCellDef>Difference</th>
+      <td mat-cell *matCellDef="let element">{{ element.difference }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef>City</th>
+      <td mat-cell *matCellDef="let element">{{ element.city }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="bonus">
+      <th mat-header-cell *matHeaderCellDef>Bonus</th>
+      <td mat-cell *matCellDef="let element">{{ element.bonus }}</td>
+    </ng-container>
+
+    <!-- Row shown when there is no matching data. -->
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button color="primary" (click)="handleEdit(row)">
+          Edit
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button color="accent" (click)="handleDelete(row)">
+          Delete
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+</div>
