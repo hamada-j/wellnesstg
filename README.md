@@ -1,4 +1,4 @@
-![logo](https://github.com/hamada-j/wellnesstg/blob/008-Fix-Details-App/wellnesstg-electric/src/assets/images/log.png | width=100)
+![logo](https://github.com/hamada-j/wellnesstg/blob/main/wellnesstg-electric/src/assets/images/log.png | width=100)
 
 # wellnesstg
 
@@ -86,6 +86,8 @@ Para levantar el servidor, en la carpeta de 'wellnesstg-restful-api' por el coma
 npm run start
 ```
 
+![backend](https://github.com/hamada-j/wellnesstg/blob/main/wellnesstg-electric/src/assets/images/backend.png)
+
 ### sobre wellnesstg-restful-api
 
 Backend con [NodeJS](https://nodejs.dev/) donde se genera un servidor que gestiona la app de [ExpresJS](https://expressjs.com/) diseñada con el modelo de rest ful api en abase a famework que es bastante robusto. Distribuido en carpetas de diversas fucionalidades, independientes exportables. La base de datos elegida es MongoDB y su servicio Atlas que permite obtgener y almacenar la informacion en la nube. En la API hay dos formas de conectar utilizando el paquete 'MongoCliente' o en este caso la libreria 'Mongoose' que permite implementar un esquema y una docuementacion excelente. Para la gestion de CORS, Parseo, logs, variables de entorno, etc se recurre a paquetes NPM de buena reputacion y numero de descargas alto por la comunidad.
@@ -138,6 +140,7 @@ visitando la url `http://localhost:4200/` o con la flag -o para abrir una ventan
 ```
 ng serve -o
 ```
+![frontend](https://github.com/hamada-j/wellnesstg/blob/main/wellnesstg-electric/src/assets/images/frontend.png)
 
 ### sobre wellnesstg-electric
 
@@ -202,5 +205,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 - NodeJS
 - MacOS
 - Angular
+- 
 
 Cualquier sugercia o idea es bienvenida; h.embarec@protonmail.com 🙂
