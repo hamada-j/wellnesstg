@@ -205,6 +205,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 - NodeJS
 - MacOS
 - Angular
-- 
+
+![Demo](https://github.com/hamada-j/wellnesstg/blob/main/wellnesstg-electric/src/assets/images/electric.mp4)
 
 Cualquier sugercia o idea es bienvenida; h.embarec@protonmail.com 🙂
