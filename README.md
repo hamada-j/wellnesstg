@@ -1,4 +1,4 @@
-![logo](https://github.com/hamada-j/wellnesstg/blob/main/wellnesstg-electric/src/assets/images/log.png | width=100)
+![logo](https://github.com/hamada-j/wellnesstg/blob/main/wellnesstg-electric/src/assets/images/log.png)
 
 # wellnesstg
 
