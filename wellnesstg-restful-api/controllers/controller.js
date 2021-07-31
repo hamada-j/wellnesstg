@@ -41,13 +41,45 @@ exports.postOne = async (req, res, next) => {
       }     
 };
 
+exports.editOne = async (req, res, next) => {
+      try { 
+            const exitRegister = await customSchema.findOne({ _id: req.body._id});
+            if(!exitRegister){
+                  res.status(400).json({
+                  error: "Can not save this record in database don't has _id, try create new one."});
+            } else {
+                  customSchema.updateOne({_id:req.body._id}, {$set:req.body}, {upsert: true} ,
+                        (err, response) => {
+                        if(err) {
+                              return res.status(400).json({error:'You are not authorized or wrong data'})
+                        }
+                        res.status(200).json(response);
+                  });                  
+            }
+      } catch (err) {
+            console.log(err);
+            res.status(500).json({error: "postOne: " + err });
+      }     
+};
 
-
-
-
-
-
-
+exports.deleteOne = async (req, res, next) => {
+      try { 
+            const exitRegister = await customSchema.findOne({ _id: req.params._id});
+            if(!exitRegister){
+                  res.status(400).json({
+                  error: `Can not delete this record form database. Db don't has this _id: ${req.params._id}.`});
+            } else {
+                  await exitRegister.delete().then((response) => {
+                        //console.log(response)
+                        res.status(200).json(response);
+                  }).catch((err) => {console.log(err);
+                  return res.status(400).json({error:'You are not authorized or wrong data'})});                  
+            }
+      } catch (err) {
+            console.log(err);
+            res.status(500).json({error: "postOne: " + err });
+      }     
+};
 
 
 exports.postCSV = async (req, res, next) => {
@@ -88,7 +120,7 @@ exports.postCSV = async (req, res, next) => {
 
             } 
 
-            res.status(200).json({msg: "The records in file are saved in Database correctly."})      
+            res.status(200).json({msg: `The doc ${fileName} in file are saved in Database correctly.`})      
       }
       catch (err){
             res.status(500).json({ message: "-----> " + err });

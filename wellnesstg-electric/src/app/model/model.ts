@@ -1,12 +1,12 @@
 export class Customer {
-    _id: number | null;
+    _id: string | null;
     name: string;
     power: number;
     consumption: number;
     difference: number;
     city: string;
     bonus: boolean;
-    constructor(pId: number, pName: string, pPower: number, pDifference: number, pConsumption: number, pCity: string, pBonus: boolean) {
+    constructor(pId: string, pName: string, pPower: number, pDifference: number, pConsumption: number, pCity: string, pBonus: boolean) {
         this._id = pId;
         this.name = pName;
         this.power = pPower;

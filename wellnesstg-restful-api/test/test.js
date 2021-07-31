@@ -18,7 +18,8 @@ beforeEach(async (done) => {
    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.kvfg8.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`, {
       useUnifiedTopology: true,
       useCreateIndex: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      useFindAndModify: false
 },
     () => done(),
   );
@@ -125,3 +126,98 @@ test('POST /post-one, Should post one element in database givin the correct data
       console.log(err);
     }
 });
+
+
+
+test('PATCH /edit-one, Should post one element fom de CSV in database and edited it with new data', 
+  async () => {
+    try{
+      let _idDoc ;
+      const beforeInsertRecord = {
+        name: arrTest[0].name,
+        power: arrTest[0].power,
+        consumption: arrTest[0].consumption,
+        difference: arrTest[0].difference,
+        city: arrTest[0].city,
+        bonus: arrTest[0].bonus,
+      }
+      await customSchema.create(beforeInsertRecord)
+        .then(res => {_idDoc = res._id;})
+        .catch(err => console.error(err));
+
+      const afterInsertRecord = {
+      _id: _idDoc,
+      name: 'Tomas',
+      power: 100,
+      consumption: 90,
+      difference: 10,
+      city: 'Barcelona',
+      bonus: true
+    }
+    await supertest(app)
+      .put('/edit-one')
+      .send(afterInsertRecord)
+      .expect(200)
+      .then(async (response) => {
+        const resultUpdate = await customSchema.findOne({_id: _idDoc});
+        //the response of update
+        expect(response.body).toBeTruthy();
+        expect(response.body.n).toBe(1);
+        expect(response.body.nModified).toBe(1);
+        expect(response.body.ok).toBe(1);
+        //the data in database
+        expect(resultUpdate).toBeTruthy();
+        expect(resultUpdate.name).toBe(afterInsertRecord.name);
+        expect(resultUpdate.power).toBe(afterInsertRecord.power);
+        expect(resultUpdate.consumption).toBe(afterInsertRecord.consumption);
+        expect(resultUpdate.city).toBe(afterInsertRecord.city);
+        expect(resultUpdate.bonus).toBe(afterInsertRecord.bonus);
+      });
+    }catch(err){
+      console.log(err);
+    }
+});
+
+test('DELETE /delete-one, Should post one element fom de CSV in database and delete it', 
+  async () => {
+    try{
+      let _idDoc ;
+      let afterInsertRecord;
+      const beforeInsertRecord = {
+        name: arrTest[0].name,
+        power: arrTest[0].power,
+        consumption: arrTest[0].consumption,
+        difference: arrTest[0].difference,
+        city: arrTest[0].city,
+        bonus: arrTest[0].bonus,
+      }
+    
+      await customSchema.create(beforeInsertRecord)
+        .then(res => {_idDoc = res._id; afterInsertRecord = res;})
+        .catch(err => console.error(err));
+      const dataBeforeDelete = await customSchema.find();
+
+     await supertest(app)
+      .delete(`/delete-one/${_idDoc}`)
+      .send()
+      .expect(200)
+      .then(async (response) => {
+        //the response of delete
+        expect(response.body).toBeTruthy();
+        expect(response.body._id).toBe(afterInsertRecord._id.toString());
+        expect(response.body.power).toBe(afterInsertRecord.power);
+        expect(response.body.consumption).toBe(afterInsertRecord.consumption);
+        expect(response.body.difference).toBe(afterInsertRecord.difference);
+        expect(response.body.city).toBe(afterInsertRecord.city);
+        expect(response.body.bonus).toBe(afterInsertRecord.bonus);
+        //the data in database
+        const dataAfterDelete = await customSchema.find();
+        expect(Array.isArray(dataAfterDelete)).toBeTruthy();
+        expect(dataAfterDelete.length).toEqual(0);
+        expect(dataAfterDelete).not.toBe(dataBeforeDelete);
+      });
+    }catch(err){
+      console.log(err);
+    }
+});
+

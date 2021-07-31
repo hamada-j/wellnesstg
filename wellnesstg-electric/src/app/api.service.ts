@@ -29,6 +29,14 @@ export class ApiService {
     return this.httpClient.get<Customer[]>(`${this.baseUrl}/`).toPromise();
   }
 
+  editRecord(form: Customer): Promise<Customer> {
+    return this.httpClient.put<Customer>(`${this.baseUrl}/edit-one`, form ).toPromise();
+  }
+
+  deleteRecord(_id: string | null): Promise<string> {
+    return this.httpClient.delete<string>(`${this.baseUrl}/delete-one/${_id}`).toPromise();
+  }
+
   createHeaders() {
     let headers = new HttpHeaders()
     headers=headers.append('content-type','application/json')

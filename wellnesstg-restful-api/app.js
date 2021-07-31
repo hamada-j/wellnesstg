@@ -7,9 +7,6 @@ const morgan = require('morgan')
 require('dotenv').config();
 require("./db/mongoDB");
 
-const {MongoClient} = require('mongodb');
-const uri = "mongodb+srv://wellnesstgUser:JtGK2Fyz6JGTMVGE@cluster0.kvfg8.mongodb.net/sample_mflix?retryWrites=true&w=majority";
-
 /** ==========================================
  
                   ROUTING
@@ -34,13 +31,13 @@ app.use(morgan('combined'))
  
 ==========================================**/
 mongoose.Promise = global.Promise;
-
 /** ==========================================**/
 app.use(express.urlencoded({ extended: false }));
 /** ==========================================
-              HEADERS --- CORS      
+              HEADERS --- CORS   /  PARSE   
           
 ==========================================**/
+//app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());

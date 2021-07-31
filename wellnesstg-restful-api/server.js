@@ -67,7 +67,7 @@ function onListening() {
           
 ==========================================**/
 app.use((req, res, next) => {
-  const error = new Error("Not Found, I creat this message");
+  const error = new Error("Not Found, I creat this message to handle server errors");
   error.status = 404;
   next(error);
 });
