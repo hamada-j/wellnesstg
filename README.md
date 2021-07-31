@@ -2,7 +2,7 @@
 
 # wellnesstg
 
-Wellnesstg se trata de una prueba de capacidad técnica, que consisten en desarrollar una aplicación que registre datos de facturación eléctrica por medio de un archivo .csv, una tabla que realiza CRUD en la misma y una compnente donde se presenta la informacion en forma de graficas, zonas de distribucion, etc.
+Wellnesstg se trata de una prueba de capacidad técnica, que consisten en desarrollar una aplicación que registre datos de facturación eléctrica por medio de un archivo .csv, una tabla que realiza CRUD en la misma y un compnente donde se presenta la informacion en forma de graficas, zonas de distribucion, etc.
 
 El proyecto consta de dos carpetas (wellnesstg-electric frontend y wellnesstg-restful-api back end)
 
