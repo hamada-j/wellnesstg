@@ -25,6 +25,7 @@ export class UploadCSVComponent implements OnInit {
   data: Customer[] = [];
   show: boolean = false;
   msg: string = '';
+  csvError: string = '';
   fileName: string = '';
 
   constructor(private papa: Papa, public dialog: MatDialog, private serviceApi: ApiService, private router: Router) { }
@@ -36,6 +37,7 @@ export class UploadCSVComponent implements OnInit {
     let files = event.target.files;
     let file = files[0];
     if (file && file !== undefined && file !== null && file !== [] ) {
+      console.log(file);
       this.accessLabel(file.name, "green")
       let reader = new FileReader();
       reader.readAsText(file);
@@ -76,13 +78,17 @@ export class UploadCSVComponent implements OnInit {
         dataKey: this.data
       }
     });
+    console.log(dialogRef.componentInstance.dataSource)
 
     dialogRef.afterClosed().subscribe(async result => {
-      if (result === true) {
+      if (result === true && dialogRef.componentInstance.dataSource.length !== 0) {
         await this.serviceApi.sendCSV([this.fileName, this.data]).then(res => {
           this.msg = res.msg
           this.resetResponse()
         }).catch(err => { console.log(err); });
+      }else {
+        this.csvError = "The model of this csv is not correct"
+        this.resetResponse();
       }
     })
 
@@ -97,6 +103,7 @@ export class UploadCSVComponent implements OnInit {
   resetResponse(){
     setTimeout(async () => {
       this.msg = '';
+      this.csvError = '';
       window.location.reload();
     }, 2000);
   }

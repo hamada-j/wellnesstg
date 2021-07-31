@@ -1,6 +1,6 @@
 <!-- FORM -->
-<h1 *ngIf="isAddMode">Add User</h1>
-<h1 *ngIf="!isAddMode">Edit User</h1>
+<h4 *ngIf="isAddMode">Add Client</h4>
+<h4 *ngIf="!isAddMode">Edit Client</h4>
 <div class="form">
   <form class="form-inline" [formGroup]="form" (ngSubmit)="onSubmit()">
     <label for="name">Name:</label>

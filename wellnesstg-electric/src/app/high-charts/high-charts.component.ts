@@ -11,6 +11,7 @@ import { ApiService } from '../api.service';
   styleUrls: ['./high-charts.component.scss']
 })
 export class HighChartsComponent implements OnInit {
+  breakpoint: any;
   arrayResult: any = [];
 
   Highcharts1 = Highcharts;
@@ -308,6 +309,7 @@ export class HighChartsComponent implements OnInit {
       }, 300);
 
       this.serviceApi.action$.subscribe(async (getRefresh) => { this.ngOnInit() })
+      //this.breakpoint = (window.innerWidth < 600) ? 2 : 1;
   }
 
 
@@ -320,6 +322,10 @@ export class HighChartsComponent implements OnInit {
   getSum (array: any, column: any) {
     let values = array.map((item: any) => parseInt(item[column]) || 0)
     return values.reduce((a: any, b: any) => a + b)
+  }
+
+  onResize(event: any) {
+    this.breakpoint = (event.target.innerWidth > 600) ? 2 : 1;
   }
 
 }
