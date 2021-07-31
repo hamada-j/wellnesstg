@@ -97,6 +97,7 @@ La libreia 'json-2-csv' y 'csvtojson' para convertir de CSV a JSON y viceversa, 
 ## WellnesstgElectric
 
 Al utizar el stack MEAN con [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3, que a dia de hoy es la ultima versión estable de Angular, ES NECESARIO DISPONER DE NODEJS en una determiada versión y [Typescript](https://www.typescriptlang.org/).
+Al clonar el proyecto extrañaras la carpeta del Protractor, pero la verison +12 de Angular ya no la incluye [stackoverflow](https://stackoverflow.com/questions/67620400/new-angular-project-does-not-include-e2e-folder)
 
 ```
 The Angular CLI requires a minimum Node.js version of either v12.14 or v14.15.
