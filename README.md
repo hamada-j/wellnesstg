@@ -174,6 +174,8 @@ Estructura:
 
 El proyecto dispone de [Docker](https://www.docker.com/) que permite crear tanto la app como el sevidor en contenedores Docker. Y con [Docker-Compose](https://docs.docker.com/compose/) orquestar la comunicacion y el arracando de los contenedores. La base de datos al estar en MongoDB Atlas no es necesario crear un contendor para ello. Es necesario tener instalado Docker para arracar el proyecto.
 
+Es **IMPORTANTE** añadir el .env con las credenciales pra conecar con la base de datos.
+
 Comrobamos instalcion y version de Docker:
 
 ```
