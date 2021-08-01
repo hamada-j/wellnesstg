@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from "@angular/material/table";
 import { ApiService } from '../api.service';
@@ -72,10 +72,150 @@ export class DataTableComponent implements OnInit {
   }
 
   async onSubmit() {
+      console.log()
+      if(this.form.value.name === null){
+          this.error = 'Form is empty'; this.resetResponse();
+      }else {
+        let data = this.form.value;
+        console.log(data)
+        this.submitData(data)
+      }
+  }
 
-      let data = this.form.value;
-      let name = data.name.trim();
 
+
+  async ngOnInit() {
+    await this.serviceApi.getAll().then((res) => {
+      //console.table(res);
+      this.arrayResult = new MatTableDataSource(res);
+    }).catch(err => {
+      console.log(err)
+      this.error = err.message;
+      this.resetResponse();
+    });
+
+  }
+   applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.arrayResult.filter = filterValue.trim().toLowerCase();
+  }
+
+   async handleDelete(data: Customer) {
+    //console.log(typeof data._id)
+    if(confirm("Are you sure to delete "+ data._id)) {
+      await this.serviceApi.deleteRecord(data._id)
+          .then( res => {
+            console.log(res)
+            this.message = 'Deleted!'
+            this.ngOnInit()
+            this.resetResponse();
+          })
+          .catch(err => {
+            console.log(err)
+            this.error = err.message;
+            this.resetResponse();
+          });
+    }
+  }
+
+  handleEdit(data: Customer) {
+    this._id = data._id;
+    const city = this.cities.find(x => x.name === data.city);
+    const bonus = this.bonuses.find(x => x.name === data.bonus.toString());
+    this.form.patchValue({
+      name: data.name,
+      power: data.power,
+      consumption: data.consumption,
+      city: city.id.toString(),
+      bonus: bonus.id,
+    })
+    this.isAddMode = false;
+  }
+    cancelEditMode(event: Event) {
+    this._id = '';
+    this.form.reset()
+    this.isAddMode = true;
+  }
+
+   updateName(el: any, pName: any) {
+    if (pName === null || pName === '' || pName === undefined) { return; }
+      let object = Object.assign({}, el, {name: pName.trim()});
+      this.update(object);
+
+
+  }
+
+   updatePower(el: any, pPower: any) {
+     let convertPower = Number.parseInt(pPower)
+    if (convertPower == null || convertPower <= 0.4 || convertPower == undefined || typeof convertPower !== 'number' ||isNaN(convertPower)) { return; }
+    let object = Object.assign({}, el, {power: convertPower});
+    this.update(object);
+  }
+
+  updateConsumption(el: any, pConsumption: any) {
+     let convertC = Number.parseInt(pConsumption)
+    if (convertC == null || convertC < 0 || convertC == undefined || typeof convertC !== 'number' ||isNaN(convertC)) { return; }
+    let object = Object.assign({}, el, {consumption: convertC});
+    this.update(object);
+  }
+
+  updateCity(el: any, pCity: any) {
+    if (pCity == null || pCity < '' || pCity == undefined || typeof pCity !== 'string') { return; }
+    switch(pCity) {
+        case 'Madrid':
+              let madrid = this.cities.find(x => x.name === 'Madrid').id.toString();
+              let mBonus = this.bonuses.find(x => x.name === el.bonus.toString()).id.toString();
+              let m = Object.assign({}, el, {city: madrid, bonus: mBonus});
+              this._id = el._id;
+              this.isAddMode = false;
+               this.submitData(m);
+          break;
+        case 'Barcelona':
+              let barcelona = this.cities.find(x => x.name === 'Barcelona').id.toString();
+              let bBonus = this.bonuses.find(x => x.name === el.bonus.toString()).id.toString();
+              let b = Object.assign({}, el, {city: barcelona, bonus: bBonus});
+              this._id = el._id;
+              this.isAddMode = false;
+              this.submitData(b);
+          break;
+        case 'Sevilla':
+              let seville = this.cities.find(x => x.name === 'Sevilla').id.toString();
+              let sBonus = this.bonuses.find(x => x.name === el.bonus.toString()).id.toString();
+              let s = Object.assign({}, el, {city: seville, bonus: sBonus});
+              this._id = el._id;
+              this.isAddMode = false;
+              this.submitData(s);
+          break;
+        default:
+          return;
+    }
+  }
+
+  updateBonus(el: any, bonus: any) {
+    let pBonus = bonus.toLowerCase()
+    console.log(pBonus);
+    if (pBonus == null || pBonus == undefined ) { return; }
+    let object = Object.assign({}, el, {bonus: pBonus});
+    console.log(object)
+    this.update(object);
+  }
+
+  update(object: any) {
+    this._id = object._id;
+    let record = {
+      name: object.name,
+      power: object.power,
+      consumption: object.consumption,
+      difference: object.difference,
+      city: this.cities.find(x => x.name === object.city).id.toString(),
+      bonus: this.bonuses.find(x => x.name === object.bonus.toString()).id.toString()
+    }
+    this.isAddMode = false;
+    this.submitData(record);
+  }
+
+  async submitData(data: any) {
+    let name:string = data.name.trim();
       if(name === '' || name.length < 3 ) { this.error = 'Need name or to short (Min length 2 characters).'; this.resetResponse();} else {
 
         if(data.power < 0.5 || data.power > 100 ){ this.error = 'The power shout be 0.5 kW to 100 kW Max.'; this.resetResponse();} else {
@@ -101,12 +241,10 @@ export class DataTableComponent implements OnInit {
                         this.serviceApi.action$.emit("refresh");
                         this.ngOnInit();
                   }).catch(err => {
-                          console.log(err)
                           this.error = err.message;
                           this.resetResponse();
                     });
                 } else {
-
                   let diff = data.power - data.consumption;
                   let objectForm: Customer = {
                     _id: this._id,
@@ -118,7 +256,8 @@ export class DataTableComponent implements OnInit {
                     bonus: JSON.parse(this.bonuses.find(x => x.id === Number(data.bonus)).name),
                   }
                   await this.serviceApi.editRecord(objectForm).then( res => {
-                        this.message = `The record was edited in database correctly with the id ${res._id}`;
+                        console.log(res)
+                        this.message = `The record was edited in database correctly.`;
                         this.isAddMode = true;
                         this._id = '';
                         this.resetResponse();
@@ -135,66 +274,13 @@ export class DataTableComponent implements OnInit {
         }
       }
   }
-    resetResponse(){
+
+  resetResponse(){
     setTimeout(async () => {
       this.message = '';
       this.error = '';
     }, 2000);
   }
 
-  async ngOnInit() {
-    await this.serviceApi.getAll().then((res) => {
-      //console.table(res);
-      this.arrayResult = new MatTableDataSource(res);
-    }).catch(err => {
-      console.log(err)
-      this.error = err.message;
-      this.resetResponse();
-    });
-
-  }
-   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.arrayResult.filter = filterValue.trim().toLowerCase();
-  }
-
-  handleEdit(data: Customer) {
-    this._id = data._id;
-    const city = this.cities.find(x => x.name === data.city);
-    const bonus = this.bonuses.find(x => x.name === data.bonus.toString());
-    this.form.patchValue({
-      name: data.name,
-      power: data.power,
-      consumption: data.consumption,
-      city: city.id.toString(),
-      bonus: bonus.id,
-    })
-    this.isAddMode = false;
-  }
-
-  async handleDelete(data: Customer) {
-    //console.log(typeof data._id)
-    if(confirm("Are you sure to delete "+ data._id)) {
-      await this.serviceApi.deleteRecord(data._id)
-          .then( res => {
-            console.log(res)
-            this.message = 'Deleted!'
-            this.ngOnInit()
-            this.resetResponse();
-          })
-          .catch(err => {
-            console.log(err)
-            this.error = err.message;
-            this.resetResponse();
-          });
-    }
-
-  }
-
-  cancelEditMode(event: Event) {
-    this._id = '';
-    this.form.reset()
-    this.isAddMode = true;
-  }
 
 }

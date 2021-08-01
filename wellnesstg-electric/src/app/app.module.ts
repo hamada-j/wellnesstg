@@ -25,6 +25,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 // charts
 
 import { HighchartsChartModule } from 'highcharts-angular';
+import { SatPopoverModule } from '@ncstate/sat-popover';
 
 // component
 
@@ -32,6 +33,8 @@ import { HomeComponent } from './home/home.component';
 import { UploadCSVComponent } from './upload-csv/upload-csv.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { Preview } from './upload-csv/upload-csv.component';
+import { InlineFormComponent } from './inline-form/inline-form.component';
+
 
 
 
@@ -42,7 +45,8 @@ import { Preview } from './upload-csv/upload-csv.component';
     UploadCSVComponent,
     DataTableComponent,
     HighChartsComponent,
-    Preview
+    Preview,
+    InlineFormComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ import { Preview } from './upload-csv/upload-csv.component';
     MatFormFieldModule,
     MatInputModule,
     MatGridListModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    SatPopoverModule
   ],
   providers: [],
   bootstrap: [AppComponent]

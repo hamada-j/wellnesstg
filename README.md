@@ -160,6 +160,16 @@ En el front, y para no enviar posible información comprometida, se recurre a un
 
 El logo esta diseñado con [Adobe](https://spark.adobe.com/).
 
+Estructura:
+
+- Subir el archivo .csv, solo acepta archivos csv, y que cumpalan el modelo.
+
+- Formulario de insertar registro / editar
+
+- Tabla con los elementos con sitema de filtardo, posibilidad de editar propiedades de las filas y dos botones para editar en zona superior o borrar con un popup de confirmación.
+
+- Graficas de los datos en la base de datos, por clientes, por contratación, por ciudades y cantidad total de potencia y consumo.
+
 ## Docker
 
 El proyecto dispone de [Docker](https://www.docker.com/) que permite crear tanto la app como el sevidor en contenedores Docker. Y con [Docker-Compose](https://docs.docker.com/compose/) orquestar la comunicacion y el arracando de los contenedores. La base de datos al estar en MongoDB Atlas no es necesario crear un contendor para ello. Es necesario tener instalado Docker para arracar el proyecto.
@@ -236,14 +246,8 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 - MacOS
 - Angular
 
-
-
 ## Demo
 
 https://user-images.githubusercontent.com/57291487/127755026-23054379-6b21-47e4-9ea5-9a898229e0a1.mp4
-
-
-
-
 
 Cualquier sugercia o idea es bienvenida; h.embarec@protonmail.com 🙂

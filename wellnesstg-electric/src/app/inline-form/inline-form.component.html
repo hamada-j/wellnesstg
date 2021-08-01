@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSubmit()">
+  <div class="mat-subheading-2">Edit</div>
+
+  <mat-form-field>
+    <input matInput maxLength="140" name="name" [(ngModel)]="name" />
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-button type="button" color="primary" (click)="onCancel()">
+      CANCEL
+    </button>
+    <button mat-button type="submit" color="primary">SAVE</button>
+  </div>
+</form>

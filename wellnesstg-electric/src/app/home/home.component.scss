@@ -42,34 +42,34 @@ mat-toolbar {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   mat-toolbar {
-    height: 4.3%;
+    height: 3.3%;
   }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   mat-toolbar {
-    height: 6.4%;
+    height: 4.4%;
   }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   mat-toolbar {
-    height: 7%;
+    height: 5%;
   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   mat-toolbar {
-    height: 9.3%;
+    height: 6.3%;
   }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   mat-toolbar {
-    height: 11%;
+    height: 10%;
   }
 }
