@@ -164,11 +164,18 @@ Estructura:
 
 - Subir el archivo .csv, solo acepta archivos csv, y que cumpalan el modelo.
 
+<img width="538" alt="upload" src="https://user-images.githubusercontent.com/57291487/127782974-358f20b5-4938-4baf-ae26-0de74c5bb565.png">
+
 - Formulario de insertar registro / editar
+
+<img width="1159" alt="table" src="https://user-images.githubusercontent.com/57291487/127782980-0ee4e51a-2af0-494e-a432-da839708240e.png">
 
 - Tabla con los elementos con sitema de filtardo, posibilidad de editar propiedades de las filas y dos botones para editar en zona superior o borrar con un popup de confirmación.
 
 - Graficas de los datos en la base de datos, por clientes, por contratación, por ciudades y cantidad total de potencia y consumo.
+
+<img width="1176" alt="data" src="https://user-images.githubusercontent.com/57291487/127782987-75eb9854-1200-4a54-91ef-f1b9d9b6639e.png">
+
 
 ## Docker
 
