@@ -16,6 +16,7 @@ wellnesstg
      |
      +-- more
 |
+docker-compose.yml
 .gitignore
 README.md
 ```
