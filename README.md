@@ -63,7 +63,11 @@ wellnesstg
 README.md
 ```
 
+### Test
+
 Una vez completados estos pasos, comprobamos que el archivo 'pruebas.csv' esta en la carpeta 'fixtures'. Esto nos permitira lanzar las puebas unitarias de test sobre los endpoint CRUD con las librerias Jest-Supertest.
+Los test diponen de su propia Coleccion en la base de datas, por tanto los test se realizan sin tener efecto sobre los datos que se encuentran en backend de la app, para ello diponen de un model identico al modelo en produccion pero que apunta a la coleccion de Test.
+
 Situados en la carpeta de 'wellnesstg-restful-api':
 
 ```
@@ -141,6 +145,7 @@ visitando la url `http://localhost:4200/` o con la flag -o para abrir una ventan
 ```
 ng serve -o
 ```
+
 ![frontend](https://github.com/hamada-j/wellnesstg/blob/main/wellnesstg-electric/src/assets/images/frontend.png)
 
 ### sobre wellnesstg-electric
@@ -154,6 +159,30 @@ Para realizar una muestara grafica de la información del archivo .csv, elemento
 En el front, y para no enviar posible información comprometida, se recurre a un libreria [ngx-papaparse](https://www.npmjs.com/package/ngx-papaparse) para transformar el .csv en json.
 
 El logo esta diseñado con [Adobe](https://spark.adobe.com/).
+
+## Docker
+
+El proyecto dispone de [Docker](https://www.docker.com/) que permite crear tanto la app como el sevidor en contenedores Docker. Y con [Docker-Compose](https://docs.docker.com/compose/) orquestar la comunicacion y el arracando de los contenedores. La base de datos al estar en MongoDB Atlas no es necesario crear un contendor para ello. Es necesario tener instalado Docker para arracar el proyecto.
+
+Comrobamos instalcion y version de Docker:
+
+```
+docker version
+```
+
+(Es recomendable disponer del [Dashboard](https://docs.docker.com/desktop/dashboard/))
+
+Situados en la carpeta de 'wellnesstg', donde esta el archivo 'docker-compose.yml' con el comando;
+
+```
+docker-compose up
+```
+
+Esto llevara unos minutos, implica la instalacion de las dependencies, levantar los contenedores y orquestar la comunicación. 'Compiled successfully' indiaca que ya es posible interactruar con al App en el `http://localhost:4200/`.
+
+## CircleCI
+
+El backend dipone de pipe de integración continua [CircleCI](https://circleci.com/) que cada vez que se realiza un cambio sobre la rama 'main' pasa los test e informa con un email de los resultado.
 
 ## Dependencia
 

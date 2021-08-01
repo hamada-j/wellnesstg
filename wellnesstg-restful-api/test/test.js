@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const supertest = require('supertest');
 const csv = require("csvtojson");
 
-const customSchema = require('../models/model');
+const customSchema = require('../models/testModel');
 const app = require('../app');
 
 let arrTest;
@@ -129,7 +129,7 @@ test('POST /post-one, Should post one element in database givin the correct data
 
 
 
-test('PATCH /edit-one, Should post one element fom de CSV in database and edited it with new data', 
+test('PUT /edit-one, Should post one element fom de CSV in database and edited it with new data', 
   async () => {
     try{
       let _idDoc ;

@@ -1,0 +1,16 @@
+# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
+version: 2.1
+jobs:
+  run tests:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command: |
+            npm install --save
+      - run:
+          name: Run Unit Test
+          command: |
+            ./node_modules/jest/bin/jest /test

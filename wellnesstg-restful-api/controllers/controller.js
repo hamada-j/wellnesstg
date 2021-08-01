@@ -6,15 +6,14 @@ const customSchema = require('../models/model');
 const { generateTime } = require('../utils/util');
 
 
-exports.getAll = async (req, res, next) => {
-      
- try {
-      const data = await customSchema.find();
-      res.status(200).json(data);
-} catch (err) {
-      console.log(err);
-      res.status(500).json({error: "getAll: " + err });
-  }     
+exports.getAll = async (req, res, next) => {  
+      try {
+            const data = await customSchema.find();
+            res.status(200).json(data);
+      } catch (err) {
+            console.log(err);
+            res.status(500).json({error: `getAll: ${err}` });
+      }     
 };
 
 exports.postOne = async (req, res, next) => {
@@ -30,14 +29,14 @@ exports.postOne = async (req, res, next) => {
             createRecord.save((err, doc) => {
               if (err) {
                   return res.status(400).json({
-                  message: "Can not save this record in database" + err
+                  message: `Can not save this record in database ${err}`
                 });
               }
               res.status(200).json(doc)
             })
       } catch (err) {
             console.log(err);
-            res.status(500).json({error: "postOne: " + err });
+            res.status(500).json({error: `postOne:  ${err}` });
       }     
 };
 
@@ -58,7 +57,7 @@ exports.editOne = async (req, res, next) => {
             }
       } catch (err) {
             console.log(err);
-            res.status(500).json({error: "postOne: " + err });
+            res.status(500).json({error: `Edit: ${err}` });
       }     
 };
 
@@ -77,16 +76,14 @@ exports.deleteOne = async (req, res, next) => {
             }
       } catch (err) {
             console.log(err);
-            res.status(500).json({error: "postOne: " + err });
+            res.status(500).json({error: `Edit: ${err}`});
       }     
 };
 
 
 exports.postCSV = async (req, res, next) => {
       let fileName = req.body[0];
-      let data = req.body[1]
-
-      
+      let data = req.body[1]    
       let json2csvCallback = function (err, csv) {
        if (err) throw err;
          fs.writeFile(
@@ -95,7 +92,7 @@ exports.postCSV = async (req, res, next) => {
                   function (err) {
                         if (err)
                               throw err;                 
-                        console.log('.csv saved')
+                        console.log('CSV ---> .csv saved')
                   }); 
       };      
       try{
@@ -117,13 +114,11 @@ exports.postCSV = async (req, res, next) => {
 
                               await createRegister.save();
                         }
-
             } 
-
             res.status(200).json({msg: `The doc ${fileName} in file are saved in Database correctly.`})      
       }
       catch (err){
-            res.status(500).json({ message: "-----> " + err });
+            res.status(500).json({ message: `CSV ---> ${err}` });
       }
 };
 
